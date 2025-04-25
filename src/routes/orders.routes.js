@@ -1,6 +1,7 @@
 import { Router } from "express";
+import { OrdersController } from "../controllers/orders.controller";
 
 const ordersRoutes = Router();
 
-ordersRoutes.get("/orders/:userId");
-ordersRoutes.post("/orders");
+ordersRoutes.get("/orders/:userId", OrdersController.get);
+ordersRoutes.post("/orders", OrdersController.create);
