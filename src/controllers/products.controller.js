@@ -1,16 +1,21 @@
-export class ProductsController {
+import productsService from "../services/products.service.js";
+
+class ProductsController {
   get = async (req, res, next) => {
     try {
-      res.status(200).json("get");
+      const products = await productsService.get();
+      res.status(200).json(products);
     } catch (error) {
       next(error);
     }
   };
   create = async (req, res, next) => {
     try {
-      res.status(200).json("create");
+      const product = await productsService.post(req.body);
+      if (product) res.status(200).json("create success");
     } catch (error) {
       next(error);
     }
   };
 }
+export default new ProductsController();
