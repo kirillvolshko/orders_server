@@ -5,7 +5,7 @@ class ProductsService {
     const products = await prisma.product.findMany();
     return products;
   };
-  post = async (body) => {
+  create = async (body) => {
     const { name, price, stock } = body;
     const product = await prisma.product.create({
       data: {

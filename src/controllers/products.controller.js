@@ -11,7 +11,7 @@ class ProductsController {
   };
   create = async (req, res, next) => {
     try {
-      const product = await productsService.post(req.body);
+      const product = await productsService.create(req.body);
       if (product) res.status(200).json("create success");
     } catch (error) {
       next(error);

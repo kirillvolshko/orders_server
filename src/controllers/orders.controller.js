@@ -1,17 +1,22 @@
-export class OrdersController {
-  get = async (res, req, next) => {
+import ordersService from "../services/orders.service.js";
+
+class OrdersController {
+  get = async (req, res, next) => {
+    const { userId } = req.params;
     try {
-      const { userId } = req.params;
-      res.status(200).json("orders");
+      const orders = await ordersService.get(userId);
+      res.status(200).json(orders);
     } catch (error) {
       next(error);
     }
   };
-  create = async (res, req, next) => {
+  create = async (req, res, next) => {
     try {
-      res.status(200).json("creat");
+      const order = await ordersService.create(req.body);
+      if (order) res.status(200).json("create sucess");
     } catch (error) {
       next(error);
     }
   };
 }
+export default new OrdersController();

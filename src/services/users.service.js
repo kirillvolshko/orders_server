@@ -3,6 +3,17 @@ import ApiError from "../utils/api-error.js";
 import prisma from "../lib/prisma.js";
 
 class UsersService {
+  profile = async (userId) => {
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+    });
+    return {
+      id: user.id,
+      email: user.email,
+      name: user.name,
+      balance: user.balance,
+    };
+  };
   registration = async (body) => {
     const { name, email, password } = body;
     const existingUser = await prisma.user.findUnique({
