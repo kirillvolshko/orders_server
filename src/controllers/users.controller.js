@@ -1,18 +1,21 @@
-export class UsersController {
+import UsersService from "../services/users.service.js";
+
+class UsersController {
   registration = async (req, res, next) => {
     try {
-      req.body;
-      res.status(200).json("register");
+      const user = await UsersService.registration(req.body);
+      res.status(200).json(user);
     } catch (error) {
       next(error);
     }
   };
   login = async (req, res, next) => {
     try {
-      req.body;
-      res.status(200).json("login");
+      const user = await UsersService.login(req.body);
+      res.status(200).json(user);
     } catch (error) {
       next(error);
     }
   };
 }
+export default new UsersController();
