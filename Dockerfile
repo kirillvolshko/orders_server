@@ -2,10 +2,20 @@ FROM node:18
 
 WORKDIR /app
 
+
 COPY package*.json ./
+
 
 RUN npm install
 
+
 COPY . .
 
-CMD ["sh", "-c", "npx prisma migrate dev --name init && npm run dev"]
+
+COPY entrypoint.sh /entrypoint.sh
+
+
+RUN chmod +x /entrypoint.sh
+
+
+ENTRYPOINT ["/entrypoint.sh"]
