@@ -8,11 +8,13 @@ COPY package*.json ./
 
 RUN npm install
 
-COPY . .
+COPY . ./
 
 COPY entrypoint.sh /entrypoint.sh
 
 RUN chmod +x /entrypoint.sh
+
+RUN chown -R appuser:appuser /app
 
 USER appuser
 
